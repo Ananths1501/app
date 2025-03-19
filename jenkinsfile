@@ -9,14 +9,14 @@ pipeline {
         }
         stage('build') {
             steps {
-               sh bat "mvn clean"
-               sh bat "mvn install"
+               sh "mvn clean"
+               sh "mvn install"
 }
 }
 stage('build to images') {
             steps {
                script{
-                 sh bat 'docker build -t ananth1501/simpleapplication .'
+                 sh 'docker build -t ananth1501/simpleapplication .'
                }
     }
 }
@@ -24,7 +24,7 @@ stage('push to hub') {
             steps {
                script{
                  withDockerRegistry(credentialsId: 'Docker_cred', url: 'https://index.docker.io/v1/') {
-                 sh bat 'docker push ananth1501/simpleapplication'
+                 sh 'docker push ananth1501/simpleapplication'
                }
             }
             }
